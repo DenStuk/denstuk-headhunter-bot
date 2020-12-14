@@ -3,11 +3,21 @@ import dotenv from "dotenv";
 import http from "http";
 dotenv.config();
 
+import "./infrastructure/telegram";
+import { HeadHunterClient } from "./infrastructure/headhunter/HeadHunterClient";
+
+
+
 class Program {
 
     public static async Main() {
         console.clear();
         console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+
+        const hhClient = new HeadHunterClient();
+        const vacancies = await hhClient.findAllVacancies();
+        console.log(vacancies);
+
         
         // const application: Application = container.get<Application>(TYPES.IApplication);
         // application.initialize();

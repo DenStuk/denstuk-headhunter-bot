@@ -5,24 +5,29 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "develop": "ts-node-dev src/index.ts"
+    "develop": "ts-node-dev src/index.ts",
+    "test": ""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.0",
     "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
     "compression": "^1.7.4",
     "cron": "^1.8.2",
+    "dayjs": "^1.9.7",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^4.2.0",
     "morgan": "^1.10.0",
     "node-telegram-bot-api": "^0.50.0",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.29"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/cron": "^1.7.2",
     "@types/express": "^4.17.9",
     "@types/node": "^14.14.13",
