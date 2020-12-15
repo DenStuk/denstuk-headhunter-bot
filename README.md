@@ -20,3 +20,4 @@ This is a simple Telegram bot, that aggregate vacancies from popular in the Russ
 
 * Domain-Driven Design
 * BDD
+* Trunk-Based Development

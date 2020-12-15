@@ -4,9 +4,9 @@ import http from "http";
 dotenv.config();
 
 import "./infrastructure/telegram";
-import { HeadHunterClient } from "./infrastructure/headhunter/HeadHunterClient";
 
-
+import { createConnection } from "net";
+import { getConnectionOptions } from "typeorm";
 
 class Program {
 
@@ -14,11 +14,9 @@ class Program {
         console.clear();
         console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 
-        const hhClient = new HeadHunterClient();
-        const vacancies = await hhClient.findAllVacancies();
-        console.log(vacancies);
+        const connectionOptions = await getConnectionOptions(process.env.NODE_ENV);
+        await createConnection({ ...connectionOptions, name: "default" } as any);
 
-        
         // const application: Application = container.get<Application>(TYPES.IApplication);
         // application.initialize();
         const server = http.createServer();

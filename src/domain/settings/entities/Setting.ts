@@ -9,18 +9,18 @@ export class Setting {
     public id!: string;
 
     @Column("json")
-    public keywords!: { words: string[] }
+    public keywords: { words: string[] }
 
     @Column("enum")
-    public currency!: CurrencyType;
+    public currency: CurrencyType;
 
     @Column("float")
-    public salaryFrom!: number;
+    public salaryFrom: number;
 
-    @Column("float")
-    public salaryTo!: number;
+    @Column("float", { nullable: true })
+    public salaryTo: number;
 
     @ManyToOne(type => User, user => user.settings)
-    public user!: User;
+    public user: User;
 
 }
