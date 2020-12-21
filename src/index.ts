@@ -3,10 +3,10 @@ import dotenv from "dotenv";
 import http from "http";
 dotenv.config();
 
+import "./application/cron";
 import "./infrastructure/telegram";
 
-import { createConnection } from "net";
-import { getConnectionOptions } from "typeorm";
+import { createConnection, getConnectionOptions } from "typeorm";
 
 class Program {
 

@@ -11,7 +11,7 @@ export class Setting {
     @Column("json")
     public keywords: { words: string[] }
 
-    @Column("enum")
+    @Column("enum", { nullable: false, enum: CurrencyType })
     public currency: CurrencyType;
 
     @Column("float")
