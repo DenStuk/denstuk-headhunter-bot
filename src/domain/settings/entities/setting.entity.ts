@@ -1,18 +1,21 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { CurrencyType } from "../../shared/enums/CurrencyType";
-import { User } from "../../users/entities/User";
+import { CurrencyType } from "../../shared/enums/currency-type";
+import { User } from "../../users/entities/user.entity";
 
-@Entity()
+@Entity("settings")
 export class Setting {
 
     @PrimaryGeneratedColumn("uuid")
-    public id!: string;
+    public id: string;
 
-    @Column("json")
-    public keywords: { words: string[] }
+    @Column("simple-array")
+    public keywords: string[]
 
     @Column("enum", { nullable: false, enum: CurrencyType })
     public currency: CurrencyType;
+
+    @Column("varchar", { nullable: false })
+    public address: string;
 
     @Column("float")
     public salaryFrom: number;

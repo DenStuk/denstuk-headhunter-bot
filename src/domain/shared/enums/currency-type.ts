@@ -1,0 +1,1 @@
+export enum CurrencyType { "RUR" = "RUR", "USD" = "USD", "EUR" = "EUR" };

@@ -1,7 +1,7 @@
 import axios from "axios";
 import dayjs from "dayjs";
-import { Setting } from "../../domain/settings/entities/Setting";
-import { HttpError } from "../../domain/shared/errors/HttpError";
+import { Setting } from "../../domain/settings/entities/setting.entity";
+import { HttpError } from "../../domain/shared/errors/http-error";
 
 
 export class HeadHunterClient {
@@ -26,7 +26,7 @@ export class HeadHunterClient {
 
     public async findFreshVacanciesBySetting(setting: Setting): Promise<any> {
         try {
-            const dateFrom = dayjs().subtract(12, "h");
+            const dateFrom = dayjs().subtract(12, "h").format();
             const dateTo = dayjs().format();
 
             const { data } = await axios({
@@ -35,14 +35,13 @@ export class HeadHunterClient {
                 params: {
                     date_from: dateFrom,
                     date_to: dateTo,
-                    text: setting.keywords.words.join(","),
+                    text: setting.keywords.join(","),
                     currency: setting.currency,
-                    salary: {
-                        from: setting.salaryFrom,
-                        to: setting.salaryTo
-                    }
+                    salary: setting.salaryFrom
                 }
             });
+
+            console.log(data)
 
             return data;
         } catch (err) { throw new HttpError(err.statusCode, err.message); }

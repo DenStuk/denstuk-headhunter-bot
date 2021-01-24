@@ -1,20 +1,16 @@
-import Telegram from "node-telegram-bot-api"
+import Telegram from "node-telegram-bot-api";
+import { messageHandler } from "./usecases/message";
+import { startUseCase } from "./usecases/start";
 
-const Bot = new Telegram(process.env.TELEGRAM_TOKEN!, { polling: true });
+export class Bot {
 
-Bot.onText(/\/echo (.+)/, (msg, match) => {
-    const chatId = msg.chat.id;
-    const resp = match![1];
-    Bot.sendMessage(chatId, resp);
-});
+    private _bot: Telegram;
+    public constructor() {
+        this._bot = new Telegram(process.env.TELEGRAM_TOKEN!, { polling: true });
+    }
 
-Bot.onText(/\/vacancies/, (msg, match) => {
-    const chatId = msg.chat.id;
-    const resp = match![1];
-    Bot.sendMessage(chatId, "Hello");
-});
-
-Bot.on('message', (msg) => {
-    const chatId = msg.chat.id;
-    Bot.sendMessage(chatId, 'Received your message');
-});
+    public initialize() {
+        this._bot.onText(/\/start/, async (msg, match) => await startUseCase(this._bot, msg));
+        this._bot.on("message", async (msg) => await messageHandler(this._bot, msg));
+    }
+}
